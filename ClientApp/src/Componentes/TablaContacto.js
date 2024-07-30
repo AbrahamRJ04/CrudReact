@@ -2,7 +2,12 @@
 
 
 
-const TablaContacto = ({data}) => {
+const TablaContacto = ({ data, setEditar, muestraModal, setMostrarModal }) => {
+
+    const enviarDatos = (contacto) => {
+        setEditar(contacto)
+        setMostrarModal(!muestraModal)
+    }
     return (
         <Table striped responsive>
             <thead>
@@ -24,7 +29,9 @@ const TablaContacto = ({data}) => {
                                     <td>{item.correo }</td>
                                     <td>{item.telefono }</td>
                                     <td>
-                                        <Button color="primary" size="sm" className="me-2">Editar</Button>
+                                        <Button color="primary" size="sm" className="me-2"
+                                            onClick={() => enviarDatos(item) }
+                                        >Editar</Button>
                                         <Button color="danger" size="sm">Eliminar</Button>
 
                                     </td>

@@ -7,6 +7,7 @@ const App = () => {
 
     const [contactos, setContactos] = useState([])
     const [muestraModal, setMostrarModal] = useState(false)
+    const [editar, setEditar] = useState(null)
 
     const MostrarContactos = async () => { 
 
@@ -43,6 +44,24 @@ const App = () => {
     }
 
 
+
+    const editarContacto = async (contacto) => {
+
+        const response = await fetch("api/contacto/Editar", {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(contacto)
+        })
+
+        if (response.ok) {
+            setMostrarModal(!muestraModal);
+            MostrarContactos();
+        }
+
+    }
+
     return (
         <Container>
             <Row className="mt-5">
@@ -56,7 +75,11 @@ const App = () => {
                                 onClick={() => setMostrarModal(!muestraModal) }
                             >Nuevo Contaco</Button>
                             <hr></hr>
-                            <TablaContacto data={contactos} />
+                            <TablaContacto data={contactos}
+                                setEditar={setEditar}
+                                muestraModal={muestraModal}
+                                setMostrarModal={setMostrarModal }
+                            />
                         </CardBody>
                     </Card>
                 </Col>
@@ -66,7 +89,14 @@ const App = () => {
 
                 muestraModal={muestraModal}
                 setMostrarModal={setMostrarModal}
-                guardarContacto={guardarContacto }
+                guardarContacto={guardarContacto}
+
+
+                editar={editar}
+                setEditar={setEditar}
+                editarContacto={editarContacto }
+
+
             />
 
         </Container>
