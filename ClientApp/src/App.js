@@ -62,6 +62,26 @@ const App = () => {
 
     }
 
+    const eliminarContacto = async (id) => {
+
+        var respuesta = window.confirm("¿Seguro decea eliminar el contacto?")
+
+        if (!respuesta) {
+            return
+        }
+
+        const response = await fetch("api/contacto/Eliminar/" + id, {
+            method: 'DELETE',
+        })
+
+        if (response.ok) {
+            MostrarContactos();
+        }
+
+    }
+
+
+
     return (
         <Container>
             <Row className="mt-5">
@@ -78,7 +98,9 @@ const App = () => {
                             <TablaContacto data={contactos}
                                 setEditar={setEditar}
                                 muestraModal={muestraModal}
-                                setMostrarModal={setMostrarModal }
+                                setMostrarModal={setMostrarModal}
+
+                                eliminarContacto={eliminarContacto }
                             />
                         </CardBody>
                     </Card>

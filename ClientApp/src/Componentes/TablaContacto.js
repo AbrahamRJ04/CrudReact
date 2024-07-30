@@ -2,7 +2,7 @@
 
 
 
-const TablaContacto = ({ data, setEditar, muestraModal, setMostrarModal }) => {
+const TablaContacto = ({ data, setEditar, muestraModal, setMostrarModal, eliminarContacto }) => {
 
     const enviarDatos = (contacto) => {
         setEditar(contacto)
@@ -32,7 +32,9 @@ const TablaContacto = ({ data, setEditar, muestraModal, setMostrarModal }) => {
                                         <Button color="primary" size="sm" className="me-2"
                                             onClick={() => enviarDatos(item) }
                                         >Editar</Button>
-                                        <Button color="danger" size="sm">Eliminar</Button>
+                                        <Button color="danger" size="sm"
+                                            onClick={() => eliminarContacto(item.idContacto)}
+                                        >Eliminar</Button>
 
                                     </td>
                                 </tr>
